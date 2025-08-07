@@ -3,6 +3,7 @@ import { assets } from "../../assets/assets";
 import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Logo from "./Logo";
 
 const Hero = () => {
   const toggleRef = useRef(null);
@@ -27,12 +28,7 @@ const Hero = () => {
       {/* Navbar */}
       <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 font-medium relative z-10 backdrop-blur-md">
         {/* Logo */}
-        <Link href={`/`}>
-          <div className="flex flex-row">
-            <Image src={assets.emblem} alt="" height={40} />
-            <p className="text-xl ml-2 mt-1 text-gray-200">Civic Buddy</p>
-          </div>
-        </Link>
+      <Logo/> 
 
         {/* Hamburger (Mobile) */}
         <button
