@@ -44,10 +44,10 @@ const Navbar = () => {
 
       {isMobileMenuOpen && (
         <div className="absolute top-48 text-base left-0 bg-black w-full flex-col items-center gap-4 flex z-10">
-          {['Products', 'Customer Stories', 'Pricing', 'Docs'].map((item) => (
-            <a key={item} className="hover:text-indigo-600" href="#">
+          {['Home', 'About', 'Privacy','Contact'].map((item) => (
+            <Link key={item} className="" href={item === 'Home'?'/':`${item.toLowerCase()}`} >
               {item}
-            </a>
+            </Link>
           ))}
           <Link href={`login`}>
 

@@ -51,7 +51,7 @@ const Hero = () => {
         {/* Nav Links */}
         <ul
           ref={navRef}
-          className="hidden max-md:absolute top-full left-0 max-md:w-full md:flex md:items-center gap-8 max-md:bg-white max-md:shadow-md max-md:px-6 max-md:py-4 flex-col md:flex-row z-50"
+          className="hidden max-md:absolute top-full left-0 max-md:w-full md:flex md:items-center gap-8 max-md:bg-gray-900 max-md:shadow-md max-md:px-6 max-md:py-4 flex-col md:flex-row z-50"
         >
           {["Home", "About", "Privacy", "Contact"].map((item, i) => (
             <li key={i}>
