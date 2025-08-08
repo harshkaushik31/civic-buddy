@@ -4,8 +4,8 @@ import { TestimonialCard } from "./TestimonialCard";
 const testimonials = [
 	{
 		name: "Athar sharrif",
-		title: "professional linux yapper",
-		message: "i use arch btw",
+		title: "Full Stack Engineer",
+		message: "This solution not only simplified our workflow but also improved our UI consistency across the board. Excellent tool for modern teams.",
 		image:
 			"https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
 	},
