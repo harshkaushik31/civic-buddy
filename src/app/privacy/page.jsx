@@ -1,8 +1,13 @@
+import Navbar from '@/components/Navbar'
+import PrivacyPolicyHero from '@/components/PrivacyPolicyHero'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div className='pt-4 bg-gray-900 h-[100vh]'>
+      <Navbar/>
+      <PrivacyPolicyHero/>
+    </div>
   )
 }
 
