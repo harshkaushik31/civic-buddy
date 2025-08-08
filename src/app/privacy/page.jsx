@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import PrivacyPolicyHero from '@/components/PrivacyPolicyHero'
 import React from 'react'
