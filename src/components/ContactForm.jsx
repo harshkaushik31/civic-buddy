@@ -1,13 +1,46 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 
 const ContactForm = () => {
-  return (
-    <form className="flex flex-col items-center text-sm text-slate-800 m-4">
-      {/* Tagline */}
-      <p className="text-xs bg-indigo-200 text-indigo-600 font-medium px-3 py-1 rounded-full">
-        Contact Us
-      </p>
+  // State for form fields
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
+  // Handle input changes
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("Form Data:", formData);
+
+    // Here you can send data to an API or service
+    // fetch("/api/contact", { method: "POST", body: JSON.stringify(formData) })
+    //TODO: Call the form data post API
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center text-sm text-slate-800 m-4"
+    >
       {/* Heading */}
       <h1 className="text-4xl font-bold py-4 text-center text-white">
         Let's Get In Touch.
@@ -16,19 +49,22 @@ const ContactForm = () => {
       {/* Subtext */}
       <p className="max-md:text-sm text-gray-300 pb-10 text-center">
         Or just reach out manually to us at{" "}
-        <a href="mailto:hello@prebuiltui.com" className="text-indigo-600 hover:underline">
+        <a
+          href="mailto:hello@prebuiltui.com"
+          className="text-indigo-600 hover:underline"
+        >
           help@civicbuddy.com
         </a>
       </p>
 
       {/* Form Fields */}
       <div className="max-w-96 w-full px-4 text-white">
-        
         {/* Name */}
         <label htmlFor="name" className="font-medium">
           Full Name
         </label>
         <div className="flex items-center mt-2 mb-4 h-10 pl-3 border border-slate-300 rounded-full focus-within:ring-2 focus-within:ring-indigo-400 transition-all overflow-hidden">
+          {/* Icon */}
           <svg
             width="20"
             height="20"
@@ -44,6 +80,8 @@ const ContactForm = () => {
           <input
             id="name"
             type="text"
+            value={formData.name}
+            onChange={handleChange}
             className="h-full px-2 w-full outline-none bg-transparent"
             placeholder="Enter your full name"
             required
@@ -55,6 +93,7 @@ const ContactForm = () => {
           Email Address
         </label>
         <div className="flex items-center mt-2 mb-4 h-10 pl-3 border border-slate-300 rounded-full focus-within:ring-2 focus-within:ring-indigo-400 transition-all overflow-hidden">
+          {/* Icon */}
           <svg
             width="20"
             height="20"
@@ -70,6 +109,8 @@ const ContactForm = () => {
           <input
             id="email"
             type="email"
+            value={formData.email}
+            onChange={handleChange}
             className="h-full px-2 w-full outline-none bg-transparent"
             placeholder="Enter your email address"
             required
@@ -83,6 +124,8 @@ const ContactForm = () => {
         <textarea
           id="message"
           rows="4"
+          value={formData.message}
+          onChange={handleChange}
           className="w-full mt-2 p-2 bg-transparent border border-slate-300 rounded-lg resize-none outline-none focus:ring-2 focus-within:ring-indigo-400 transition-all"
           placeholder="Enter your message"
           required
