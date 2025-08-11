@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
       </p>
 
       <p className="text-slate-300 md:text-base  max-md:px-2 text-center max-w-7xl mt-3">
-        mera naam tun tun tun sit amet consectetur adipisicing elit. Ipsa iure accusantium beatae maxime facere corrupti dolorem, in placeat hic rerum ex similique distinctio earum numquam necessitatibus explicabo sequi exercitationem? Libero autem aliquid in eius. Magnam, iste necessitatibus? Maiores repudiandae minus sapiente qui magnam quis, porro esse facere ad, architecto odio unde, totam ea hic odit est non sunt corrupti cum?
+        KYA MERA GITHUB LINK HUA  amet consectetur adipisicing elit. Ipsa iure accusantium beatae maxime facere corrupti dolorem, in placeat hic rerum ex similique distinctio earum numquam necessitatibus explicabo sequi exercitationem? Libero autem aliquid in eius. Magnam, iste necessitatibus? Maiores repudiandae minus sapiente qui magnam quis, porro esse facere ad, architecto odio unde, totam ea hic odit est non sunt corrupti cum?
       </p>
       <p className="text-slate-300 md:text-base  max-md:px-2 text-center max-w-7xl mt-3">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa iure accusantium beatae maxime facere corrupti dolorem, in placeat hic rerum ex similique distinctio earum numquam necessitatibus explicabo sequi exercitationem? Libero autem aliquid in eius. Magnam, iste necessitatibus? Maiores repudiandae minus sapiente qui magnam quis, porro esse facere ad, architecto odio unde, totam ea hic odit est non sunt corrupti cum?
