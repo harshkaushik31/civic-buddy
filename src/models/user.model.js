@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
     role: {
       type: String,
       enum: ["citizen", "municipal_staff", "admin"],
@@ -44,6 +48,11 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    forgotPasswordToken: String,
+    forgotPasswordExpiry: Date,
+    verifyToken: String,
+    verifyExpiry: Date,
+
   },
   { timestamps: true }
 );
