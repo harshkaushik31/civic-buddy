@@ -44,9 +44,6 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    lastLogin: {
-      type: Date,
-    },
   },
   { timestamps: true }
 );
