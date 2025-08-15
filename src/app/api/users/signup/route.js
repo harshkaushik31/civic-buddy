@@ -13,9 +13,6 @@ export async function POST(request) {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    console.log("Name:", name, "Email:", email, "Password:", password);
-    console.log("Type of password:", typeof password);
-
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -35,11 +32,18 @@ export async function POST(request) {
     });
 
     const savedUser = await newUser.save();
-    console.log(savedUser);
 
-    
+    // Removing the password from saved User to return 
+    const userWithoutPassword = savedUser.toObject();
+    delete userWithoutPassword.password;
 
-    //TODO: send verification email
+    //Sending verification email
+    await sendEmail({ email, emailType: "VERIFY", userID: savedUser._id });
+
+    return NextResponse.json(
+      { message: "User Registered Successfully", success: true, userWithoutPassword },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

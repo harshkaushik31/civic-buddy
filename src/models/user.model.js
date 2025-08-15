@@ -47,7 +47,7 @@ const UserSchema = new mongoose.Schema(
     forgotPasswordToken: String,
     forgotPasswordExpiry: Date,
     verifyToken: String,
-    verifyExpiry: Date,
+    verifyTokenExpiry: Date,
 
   },
   { timestamps: true }
