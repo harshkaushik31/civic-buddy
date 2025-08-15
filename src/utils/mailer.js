@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-const sendEmail = async ({ email, emailType, userID }) => {
+export const sendEmail = async ({ email, emailType, userID }) => {
   try {
 
     //TODO: Configure mailer for usage
