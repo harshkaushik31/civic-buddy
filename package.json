@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.17.1",
     "next": "15.4.5",
     "nodemailer": "^7.0.5",
