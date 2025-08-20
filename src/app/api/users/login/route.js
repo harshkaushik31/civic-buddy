@@ -13,9 +13,9 @@ export async function POST(request) {
     const password = formData.get("password");
 
     // validation
-    console.log("Name: ", name, "Email: ", email);
+    console.log("Email: ", email, "Password: ", password);
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       return NextResponse.json(
@@ -26,33 +26,38 @@ export async function POST(request) {
 
     console.log("User exists");
 
+    console.log(user);
+
+    console.log("Plain password:", password);
+    console.log("Hashed password from DB:", user.password);
+
     const isValidPassword = await bcryptjs.compare(password, user.password);
 
     if (!isValidPassword) {
       return NextResponse.json(
-        { message: "Check your credientials"},
+        { message: "Check your credientials" },
         { status: 400 }
       );
     }
 
     const tokenData = {
-        id: user._id
-    }
+      id: user._id,
+    };
 
-    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, {expiresIn: '7d'});
+    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, {
+      expiresIn: "7d",
+    });
 
     const response = NextResponse.json({
-        message: "Login Success",
-        success: true
-    })
+      message: "Login Success",
+      success: true,
+    });
 
     response.cookies.set("token", token, {
-        httpOnly: true
-    })
+      httpOnly: true,
+    });
 
-    return response
-
-
+    return response;
   } catch (error) {
     return NextResponse.json(
       { message: "Error logging in: ", error },
