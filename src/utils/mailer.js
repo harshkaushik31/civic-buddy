@@ -12,9 +12,10 @@ export const sendEmail = async ({ email, emailType, userID }) => {
         verifyTokenExpiry: Date.now() + 3600000,
       });
     } else if (emailType === "RESET") {
-      await User.findByIdAndUpdate(userID, {
+      await User.findByIdAndUpdate(userID,{
+        $set: {
         forgotPasswordToken: hashToken,
-        forgotPasswordExpiry: Date.now() + 3600000,
+        forgotPasswordExpiry: Date.now() + 3600000,}
       });
     }
 
