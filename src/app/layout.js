@@ -14,6 +14,11 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Civic Buddy",
   description: "An app for Smart Cities",
+  icons: {
+    icon: '/Emblem_of_India.svg',
+    shortcut: '/Emblem_of_India.svg',
+    apple: '/Emblem_of_India.svg',
+  },
 };
 
 export default function RootLayout({ children }) {
