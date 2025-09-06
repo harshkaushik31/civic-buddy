@@ -52,7 +52,6 @@ const SignupForm = () => {
       router.push("/login");
     } catch (error) {
       console.log(error);
-      toast.error(response.data.message);
 
       setSending(false);
     }

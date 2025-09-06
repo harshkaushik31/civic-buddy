@@ -1,8 +1,13 @@
 'use client'
 import React, { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import toast from 'react-hot-toast';
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -19,23 +24,32 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Using FormData
-    const data = new FormData();
-    data.append("email", formData.email);
-    data.append("password", formData.password);
+    try {
+      // Using FormData
+      const data = new FormData();
+      data.append("email", formData.email);
+      data.append("password", formData.password);
+  
+      // TODO: Delete this
+      for (let [key, value] of data.entries()) {
+        console.log(`${key}: ${value}`);
+      }
 
-    // Example: logging data
-    // TODO: Delete this
-    for (let [key, value] of data.entries()) {
-      console.log(`${key}: ${value}`);
+      const response = axios.post("/api/users/login",data);
+
+      console.log(response);
+      // router.push("/user-profile");
+  
+      setFormData({
+          email: "",
+          password: ""
+      })
+    } catch (error) {
+      console.log(error);
+      toast.error("Login Failed!")
     }
 
-    setFormData({
-        email: "",
-        password: ""
-    })
-
-    //TODO: You can now send this FormData to backend via fetch/axios
+    //TODO: Send this FormData to backend via fetch/axios
   };
 
   return (
