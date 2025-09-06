@@ -32,8 +32,8 @@ export const sendEmail = async ({ email, emailType, userID }) => {
 
     const actionLink =
       emailType === "VERIFY"
-        ? `${baseUrl}/users/verify-email?token=${hashToken}`
-        : `${baseUrl}/users/reset-password?token=${hashToken}`;
+        ? `${baseUrl}/verify-email?token=${hashToken}`
+        : `${baseUrl}/reset-password?token=${hashToken}`;
 
     const mailOptions = {
       from: "civic.buddy.gov.in",
