@@ -1,43 +1,61 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
+  const router = useRouter();
+
+  const [sending, setSending] = useState();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Using FormData
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("email", formData.email);
-    data.append("password", formData.password);
+    try {
+      setSending(true);
+      // Using FormData
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("email", formData.email);
+      data.append("password", formData.password);
 
-    // Example: logging data
-    for (let [key, value] of data.entries()) {
-      console.log(`${key}: ${value}`);
+      const response = await axios.post("/api/users/signup", data);
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+      }
+
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+      });
+
+      setSending(false);
+
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+      toast.error(response.data.message);
+
+      setSending(false);
     }
-
-    setFormData({
-      name: "",
-      email: "",
-      password: ""
-    });
-
-    // TODO: Send to backend via fetch/axios
   };
 
   return (
@@ -51,12 +69,7 @@ const SignupForm = () => {
 
         {/* Name Input */}
         <div className="flex items-center w-full mt-10 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path
               d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"
               fill="#6B7280"
@@ -127,13 +140,16 @@ const SignupForm = () => {
 
         <button
           type="submit"
-          className="mt-6 w-full h-11 rounded-full text-white bg-indigo-500 hover:opacity-90 transition-opacity"
+          disabled={sending}
+          className={`mt-6 w-full h-11 rounded-full text-white hover:opacity-90 transition-opacity disabled:cursor-not-allowed ${
+            sending ? "bg-indigo-100" : "bg-indigo-500"
+          }`}
         >
-          Sign Up
+          {sending ? "Signing up..." : "Sign Up"}
         </button>
         <p className="text-gray-500 text-sm mt-3 mb-11">
           Already have an account?{" "}
-          <Link className="text-indigo-500" href={'/login'}>
+          <Link className="text-indigo-500" href={"/login"}>
             Login
           </Link>
         </p>
