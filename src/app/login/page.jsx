@@ -38,7 +38,7 @@ const LoginForm = () => {
       const response = axios.post("/api/users/login",data);
 
       console.log(response);
-      // router.push("/user-profile");
+      router.push("/user-profile");
   
       setFormData({
           email: "",
