@@ -4,20 +4,24 @@ import FAQ from './FAQ';
 const FAQSection = () => {
   const faqs = [
     {
-      question: "How to use this component?",
-      answer: "To use this component, you need to import it in your project and use it in your JSX code.",
+      question: "What kind of issues can I report on Civic Buddy?",
+      answer:
+        "You can report common municipal problems such as potholes, streetlight outages, garbage collection, water supply issues, and other local civic concerns.",
     },
     {
-      question: "Are there any other components available?",
-      answer: "Yes, there are many other components available in this library.",
+      question: "Do I need to create an account to submit a complaint?",
+      answer:
+        "No, you can submit issues without creating an account. However, registering allows you to track your complaint status and get updates.",
     },
     {
-      question: "Are components responsive?",
-      answer: "Yes, all components are responsive and can be used on different screen sizes.",
+      question: "Is my personal information shared with authorities?",
+      answer:
+        "Only the information necessary to resolve the complaint is shared. Your data is encrypted and never sold or used for marketing purposes.",
     },
     {
-      question: "Can I customize the components?",
-      answer: "Yes, you can customize the components by passing props to them.",
+      question: "How does Civic Buddy forward my complaint?",
+      answer:
+        "Once you submit a report, Civic Buddy automatically routes it to the correct government department or municipal body responsible for handling it.",
     },
   ];
 

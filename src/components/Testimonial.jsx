@@ -2,29 +2,30 @@
 import React, { useRef, useState } from "react";
 import { TestimonialCard } from "./TestimonialCard";
 const testimonials = [
-	{
-		name: "Athar sharrif",
-		title: "Full Stack Engineer",
-		message: "This solution not only simplified our workflow but also improved our UI consistency across the board. Excellent tool for modern teams.",
-		image:
-			"https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
-	},
-	{
-		name: "Jane Smith",
-		title: "Full Stack Engineer",
-		message:
-			"This solution not only simplified our workflow but also improved our UI consistency across the board. Excellent tool for modern teams.",
-		image:
-			"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
-	},
-	{
-		name: "Bonnie Green",
-		title: "UX Designer",
-		message:
-			"I was impressed with how intuitive and flexible the design was. It allowed us to rapidly prototype and launch features with confidence.",
-		image:
-			"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
-	},
+  {
+    name: "Rohit Verma",
+    title: "Resident, New Delhi",
+    message:
+      "Civic Buddy made it so easy to report a broken streetlight in my area. Within days, it was fixed! The process was simple and transparent.",
+    image:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
+  },
+  {
+    name: "Ananya Sharma",
+    title: "Community Volunteer",
+    message:
+      "I love how Civic Buddy connects people directly with the right authorities. It has helped our neighborhood stay cleaner and safer.",
+    image:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+  },
+  {
+    name: "Karan Singh",
+    title: "College Student",
+    message:
+      "Reporting potholes and waste management issues has never been easier. Civic Buddy saves time and actually gets results!",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
+  },
 ];
 
 const Testimonial = () => {

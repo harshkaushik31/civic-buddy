@@ -10,7 +10,6 @@ const AboutUs = () => {
           src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?q=80&w=451&h=451&auto=format&fit=crop"
           alt="Office team"
         />
-          
       </div>
 
       <div className="text-sm max-w-lg">
@@ -19,19 +18,20 @@ const AboutUs = () => {
         </h1>
         <div className="w-24 h-[3px] rounded-full bg-gradient-to-r from-indigo-600 to-[#DDD9FF]"></div>
         <p className="mt-8 text-white">
-          PrebuiltUI helps you build faster by transforming your design vision
-          into fully functional, production-ready UI components.
+          Civic Buddy is a citizen-first platform that empowers people to report
+          municipal and civic issues directly to the responsible government
+          body.
         </p>
         <p className="mt-4 text-white">
-          Whether you're launching a SaaS app, landing page, or dashboard, our
-          collection of Tailwind CSS components is crafted to boost your
-          development speed and improve user experience.
+          From potholes and waste management to streetlights and water supply,
+          our goal is to make the reporting process faster, more transparent,
+          and efficient.
         </p>
         <p className="mt-4 text-white">
-          From UI design systems to automation-ready layouts, PrebuiltUI
-          empowers you to build beautifully and scale effortlessly.
+          By bridging the gap between citizens and authorities, Civic Buddy
+          ensures every complaint is heard, tracked, and resolved. Together, we
+          can build cleaner, safer, and smarter communities.
         </p>
-        
       </div>
     </section>
   );
