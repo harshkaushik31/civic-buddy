@@ -52,7 +52,9 @@ const SignupForm = () => {
       router.push("/login");
     } catch (error) {
       console.log(error);
-
+        console.error("Status:", err.response?.status);  
+  console.error("Data:", err.response?.data);          
+  console.error("Message:", err.message);
       setSending(false);
     }
   };
