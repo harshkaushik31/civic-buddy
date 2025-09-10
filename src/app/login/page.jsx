@@ -21,7 +21,7 @@ const LoginForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -35,7 +35,7 @@ const LoginForm = () => {
         console.log(`${key}: ${value}`);
       }
 
-      const response = axios.post("/api/users/login",data);
+      const response = await axios.post("/api/users/login",data);
 
       console.log(response);
       router.push("/user-profile");
