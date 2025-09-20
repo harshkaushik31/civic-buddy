@@ -42,7 +42,7 @@ function layout({ children }) {
       console.error("Error fetching user details:", error);
       setError(error.message || "Failed to fetch user details");
       
-      // Log more details about the error
+      // Logging more details about the error
       if (error.response) {
         console.error("Error status:", error.response.status);
         console.error("Error data:", error.response.data);
