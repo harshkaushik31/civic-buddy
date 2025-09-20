@@ -13,6 +13,7 @@ export default function ProfilePage() {
         try {
             const response = await axios.post("/api/users/profile")
             console.log(response.data.data._id);
+            console.log(response.data.data);
             setData(response.data.data._id);
         } catch (error) {
             console.log(error);

@@ -8,6 +8,7 @@ export function middleware(request) {
                       path === '/verify-email' || 
                       path === '/contact' || 
                       path === '/privacy' || 
+                      path === '/' ||
                       path === '/about';
   
   const isProtectedPath = path === '/user-profile' || 
@@ -16,8 +17,8 @@ export function middleware(request) {
   
   const token = request.cookies.get("token")?.value;
   
-  if (isPublicPath && token && (path === '/login' || path === '/signup')) {
-    return NextResponse.redirect(new URL('/', request.url))
+  if (isPublicPath && token) {
+    return NextResponse.redirect(new URL('/user-profile', request.url))
   }
   
   if (isProtectedPath && !token) {

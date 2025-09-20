@@ -7,7 +7,7 @@ const TeamMembers = () => {
       name: 'Harsh',
       role: 'Full Stack Developer',
       description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur facere quaerat magni libero, sunt quo accusantium velit enim, nulla eius molestias debitis rem corrupti!",
-      image: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200'
+      image: 'https://res.cloudinary.com/dpcal7pun/image/upload/v1758295245/WhatsApp_Image_2025-08-20_at_11.50.26_AM_1_oz7jmz.jpg'
     },
     {
       name: 'Divyanshu',
