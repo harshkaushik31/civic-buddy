@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Sidebar from "./_components/Sidebar";
 import axios from "axios";
+import LoadingPage from "@/components/Loading";
 
 function layout({ children }) {
   const [response, setResponse] = useState({
@@ -64,7 +65,7 @@ function layout({ children }) {
   }, [response]);
 
   if (loading) {
-    return <div>Loading user details...</div>;
+    return <LoadingPage/> ;
   }
 
   if (error) {
