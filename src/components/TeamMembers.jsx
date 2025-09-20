@@ -13,13 +13,13 @@ const TeamMembers = () => {
       name: 'Divyanshu',
       role: 'UI/UX Designer',
       description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus a consequatur praesentium dolor? Modi blanditiis aperiam odit quia natus magnam in id saepe cupiditate!",
-      image: 'https://randomuser.me/api/portraits/men/40.jpg'
+      image: 'https://res.cloudinary.com/dpcal7pun/image/upload/v1758379251/WhatsApp_Image_2025-09-20_at_5.09.03_PM_1_ppn1yp.jpg'
     },
     {
       name: 'Aksh',
       role: 'ML Engineer',
       description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus a consequatur praesentium dolor? Modi blanditiis aperiam odit quia natus magnam in id saepe cupiditate!",
-      image: 'https://randomuser.me/api/portraits/men/31.jpg'
+      image: 'https://res.cloudinary.com/dpcal7pun/image/upload/v1758379262/WhatsApp_Image_2025-09-20_at_8.07.13_PM_t7tgnv.jpg'
     }
   ];
 

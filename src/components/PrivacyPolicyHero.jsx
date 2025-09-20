@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
         practices described below.
       </p>
 
-      <p className="text-slate-300 md:text-base  max-md:px-2 text-center max-w-7xl mt-3">
+      <div className="text-slate-300 md:text-base  max-md:px-2 text-center max-w-7xl mt-3">
         <strong>1. Information We Collect</strong>
         <br />
         We collect only the information necessary to provide and improve our
@@ -41,7 +41,7 @@ const PrivacyPolicy = () => {
             security and optimization purposes.
           </li>
         </ul>
-      </p>
+      </div>
       <p className="text-slate-300 md:text-base  max-md:px-2 text-center max-w-7xl mt-3">
         <strong>2. How We Use Your Information</strong>
         <br />
