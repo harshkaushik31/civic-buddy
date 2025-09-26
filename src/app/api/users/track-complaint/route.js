@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import complaintModel from "@/models/complaint.model";
 import { connectDB } from "@/utils/connectDB";
+import { getDataFromToken } from "@/utils/getDataFromToken";
 
 connectDB();
 
@@ -22,6 +23,17 @@ export async function POST(req) {
     const complaint = await complaintModel.findById(complaintId);
 
     console.log('Found complaint:', complaint);
+
+    const userId = getDataFromToken(req);
+
+    if(complaint.createdBy != userId){
+      return NextResponse.json({
+        success: false,
+        message: "Enter correct complaint id",
+        statusCode: 404,
+      });
+    }
+
 
     if (!complaint) {
       return NextResponse.json({
