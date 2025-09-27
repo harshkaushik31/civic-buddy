@@ -22,6 +22,15 @@ export async function POST(req) {
 
     const complaint = await complaintModel.findById(complaintId);
 
+    
+    if (!complaint) {
+      return NextResponse.json({
+        success: false,
+        message: "Enter correct complaint id",
+        statusCode: 404,
+      });
+    }
+    
     console.log('Found complaint:', complaint);
 
     const userId = getDataFromToken(req);
@@ -35,13 +44,7 @@ export async function POST(req) {
     }
 
 
-    if (!complaint) {
-      return NextResponse.json({
-        success: false,
-        message: "Enter correct complaint id",
-        statusCode: 404,
-      });
-    }
+    
 
     return NextResponse.json({
       success: true,
