@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter, usePathname } from "next/navigation";
-import { FileText, Search, Plus, User, LogOut, Menu, X } from "lucide-react";
+import { FileText, Search, Plus, User, LogOut, Menu, X, Minus } from "lucide-react";
 import Link from "next/link";
 
 function Sidebar({ response }) {
@@ -37,6 +37,12 @@ function Sidebar({ response }) {
       icon: Plus,
       description: "Submit a new complaint",
     },
+    {
+      name: "Delete Complaint",
+      href: "/delete-complaint",
+      icon: Minus,
+      description: "Delte a complaint"
+    }
   ];
 
   const isActivePage = (href) => {
@@ -45,7 +51,6 @@ function Sidebar({ response }) {
   };
 
   const handleNavigation = (href) => {
-    // Fixed: Added missing slash
     router.push("/user-profile" + href);
     setIsMobileMenuOpen(false);
   };

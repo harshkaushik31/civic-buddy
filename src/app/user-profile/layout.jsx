@@ -43,7 +43,7 @@ function layout({ children }) {
       console.error("Error fetching user details:", error);
       setError(error.message || "Failed to fetch user details");
       
-      // Logging more details about the error
+
       if (error.response) {
         console.error("Error status:", error.response.status);
         console.error("Error data:", error.response.data);
@@ -57,7 +57,7 @@ function layout({ children }) {
     getUserDetails();
   }, [getUserDetails]);
 
-  // Log response whenever it changes
+  
   useEffect(() => {
     if (response._id) {
       console.log("Updated response state:", response);
