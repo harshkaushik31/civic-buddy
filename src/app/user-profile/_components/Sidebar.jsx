@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter, usePathname } from "next/navigation";
 import { FileText, Search, Plus, User, LogOut, Menu, X, Minus } from "lucide-react";
@@ -8,6 +8,7 @@ function Sidebar({ response }) {
   const router = useRouter();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [complaintCount, setComplaintCount] = useState(0);
 
   const logout = async () => {
     try {
@@ -17,6 +18,12 @@ function Sidebar({ response }) {
       console.log(error.message);
     }
   };
+
+  const getComplaintCount = async ()=> {
+      const complaint_count = await axios.get("/api/users/your-complaint-count");
+      setComplaintCount(complaint_count.data.complaintsCount);
+      console.log(complaint_count.data.complaintsCount);
+  }
 
   const navigationItems = [
     {
@@ -63,6 +70,10 @@ function Sidebar({ response }) {
     window.location.href = "/user-profile";
     setIsMobileMenuOpen(false);
   };
+
+  useEffect(()=>{
+    getComplaintCount();
+  },[complaintCount])
 
   return (
     <>
@@ -124,7 +135,7 @@ function Sidebar({ response }) {
                   <p className="text-sm">
                     <span className="font-medium">Total Complaints: </span>
                     <span className="bg-gray-600 px-2 py-1 rounded-full text-xs">
-                      {response.complaints ? response.complaints.length : 0}
+                      {complaintCount}
                     </span>
                   </p>
                 </div>
