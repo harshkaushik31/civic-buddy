@@ -66,11 +66,6 @@ function Sidebar({ response }) {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const returnToHome = () => {
-    window.location.href = "/user-profile";
-    setIsMobileMenuOpen(false);
-  };
-
   useEffect(()=>{
     getComplaintCount();
   },[complaintCount])
