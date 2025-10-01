@@ -6,19 +6,19 @@ const TeamMembers = () => {
     {
       name: 'Harsh',
       role: 'Full Stack Developer',
-      description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur facere quaerat magni libero, sunt quo accusantium velit enim, nulla eius molestias debitis rem corrupti!",
+      description: "Harsh is a skilled full stack developer with a sharp mind for coding. He seamlessly bridges front-end design and back-end logic, delivering complete digital solutions.",
       image: 'https://res.cloudinary.com/dpcal7pun/image/upload/v1758295245/WhatsApp_Image_2025-08-20_at_11.50.26_AM_1_oz7jmz.jpg'
     },
     {
       name: 'Divyanshu',
       role: 'UI/UX Designer',
-      description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus a consequatur praesentium dolor? Modi blanditiis aperiam odit quia natus magnam in id saepe cupiditate!",
+      description: "Divyanshu is a talented UI/UX designer with a keen eye for detail. He crafts intuitive, user-friendly interfaces that blend aesthetics with seamless functionality",
       image: 'https://res.cloudinary.com/dpcal7pun/image/upload/v1758379251/WhatsApp_Image_2025-09-20_at_5.09.03_PM_1_ppn1yp.jpg'
     },
     {
       name: 'Aksh',
       role: 'ML Engineer',
-      description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus a consequatur praesentium dolor? Modi blanditiis aperiam odit quia natus magnam in id saepe cupiditate!",
+      description: "Aksh is a dedicated ML engineer who builds intelligent models. He transforms data into insights, creating smart algorithms that drive innovative machine learning solutions",
       image: 'https://res.cloudinary.com/dpcal7pun/image/upload/v1758379262/WhatsApp_Image_2025-09-20_at_8.07.13_PM_t7tgnv.jpg'
     }
   ];
