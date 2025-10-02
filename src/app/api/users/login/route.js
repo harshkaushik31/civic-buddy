@@ -1,6 +1,6 @@
 import { connectDB } from "@/utils/connectDB";
 import User from "@/models/user.model";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -26,11 +26,6 @@ export async function POST(request) {
 
     console.log("User exists");
 
-    console.log(user);
-
-    console.log("Plain password:", password);
-    console.log("Hashed password from DB:", user.password);
-
     const isValidPassword = await bcryptjs.compare(password, user.password);
 
     if (!isValidPassword) {
@@ -39,6 +34,9 @@ export async function POST(request) {
         { status: 400 }
       );
     }
+
+    const role = user.role;
+    const isVerified = user.isVerified;
 
     const tokenData = {
       id: user._id,
@@ -49,6 +47,8 @@ export async function POST(request) {
     });
 
     const response = NextResponse.json({
+      isVerified,
+      role,
       message: "Login Success",
       success: true,
     });

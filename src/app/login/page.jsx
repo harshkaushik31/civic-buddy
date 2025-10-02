@@ -4,6 +4,8 @@ import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { getDataFromToken } from "@/utils/getDataFromToken";
+// import User from "@/models/user.model";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -30,15 +32,18 @@ const LoginForm = () => {
       data.append("email", formData.email);
       data.append("password", formData.password);
 
-      // TODO: Delete this
-      for (let [key, value] of data.entries()) {
-        console.log(`${key}: ${value}`);
-      }
-
       const response = await axios.post("/api/users/login", data);
 
-      console.log(response);
-      router.push("/user-profile");
+      if(!response.data.isVerified){
+        //TODO: if not verified setError
+        console.log("Please verify yourself first");
+      }
+
+      if(response.data.role === "municipal_staff"){
+        router.push("/department");
+      }else{
+        router.push("/user-profile");
+      }
 
       setFormData({
         email: "",
