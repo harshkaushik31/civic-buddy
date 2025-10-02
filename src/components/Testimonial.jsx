@@ -3,28 +3,31 @@ import React, { useRef, useState } from "react";
 import { TestimonialCard } from "./TestimonialCard";
 const testimonials = [
   {
-    name: "Rohit Verma",
+    name: "Aditya Tripthi",
     title: "Resident, New Delhi",
+	mainTitle: "Easy to Use",
     message:
       "Civic Buddy made it so easy to report a broken streetlight in my area. Within days, it was fixed! The process was simple and transparent.",
     image:
-      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
+      "https://res.cloudinary.com/dpcal7pun/image/upload/v1759388142/WhatsApp_Image_2025-08-05_at_10.52.21_AM_eetw5h.jpg",
   },
   {
-    name: "Ananya Sharma",
+    name: "Vaibhav Sahu",
     title: "Community Volunteer",
+	mainTitle: "The Website Works",
     message:
       "I love how Civic Buddy connects people directly with the right authorities. It has helped our neighborhood stay cleaner and safer.",
     image:
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+      "https://res.cloudinary.com/dpcal7pun/image/upload/v1759388456/WhatsApp_Image_2025-10-02_at_12.29.11_PM_1_gx4ry6.jpg",
   },
   {
-    name: "Karan Singh",
+    name: "Tanmay Singh",
     title: "College Student",
+	mainTitle: "Very Easy to Integerate",
     message:
       "Reporting potholes and waste management issues has never been easier. Civic Buddy saves time and actually gets results!",
     image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
+      "https://res.cloudinary.com/dpcal7pun/image/upload/v1759388584/WhatsApp_Image_2025-10-02_at_12.27.54_PM_1_iwn4ur.jpg",
   },
 ];
 

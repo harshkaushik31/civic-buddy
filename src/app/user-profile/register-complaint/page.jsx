@@ -52,8 +52,8 @@ export default function Page() {
 
   const departments = [
     { value: "PWD", label: "Public Works Department (PWD)" },
-    { value: "NRDA", label: "Nagpur Road Development Authority (NRDA)" },
-    { value: "NMC", label: "Nagpur Municipal Corporation (NMC)" },
+    { value: "NRDA", label: "Naya Raipur Development Authority (NRDA)" },
+    { value: "NRMC", label: "Naya Raipur Municipal Corporation (NRMC)" },
     { value: "Electricity", label: "Electricity Department" },
     { value: "Water", label: "Water Supply Department" },
     { value: "Traffic", label: "Traffic Police" },

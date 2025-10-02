@@ -6,7 +6,7 @@ export const TestimonialCard = ({ testimonial, index, cardRefs, onMouseMove, onM
 
     <div className="flex flex-col items-center justify-center p-8 text-center">
       <div className="mb-4 text-white">
-        <h3 className="text-lg font-semibold text-white">Very easy to integrate</h3>
+        <h3 className="text-lg font-semibold text-white">{testimonial.mainTitle}</h3>
         <p className="my-4 text-sm line-clamp-3">{testimonial.message}</p>
       </div>
       <div className="flex items-center justify-center">
