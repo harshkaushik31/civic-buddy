@@ -40,13 +40,13 @@ export default function Page() {
   const issueTypes = [
     { value: "pothole", label: "Pothole" },
     { value: "streetlight_broken", label: "Street Light" },
-    { value: "garbage", label: "Garbage Collection" },
-    { value: "water-supply", label: "Water Supply" },
+    { value: "garbage_dumping", label: "Garbage Collection" },
+    { value: "water_supply", label: "Water Supply" },
     { value: "sewage", label: "Sewage Problem" },
-    { value: "road-damage", label: "Road Damage" },
-    { value: "traffic-signal", label: "Traffic Signal" },
-    { value: "illegal-construction", label: "Illegal Construction" },
-    { value: "noise-pollution", label: "Noise Pollution" },
+    { value: "road_damage", label: "Road Damage" },
+    { value: "traffic_signal", label: "Traffic Signal" },
+    { value: "illegal_construction", label: "Illegal Construction" },
+    { value: "noise_pollution", label: "Noise Pollution" },
     { value: "other", label: "Other" }
   ];
 

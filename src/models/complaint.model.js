@@ -18,6 +18,11 @@ const ComplaintSchema = new mongoose.Schema(
       enum: [
         "pothole",
         "garbage_dumping",
+        "water_supply",
+        "sewage",
+        "road_damage",
+        "traffic_signal",
+        "noise_pollution",
         "streetlight_broken",
         "water_logging",
         "illegal_construction",
