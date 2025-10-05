@@ -36,7 +36,7 @@ export const sendEmail = async ({ email, emailType, userID }) => {
         : `${baseUrl}/reset-password?token=${hashToken}`;
 
     const mailOptions = {
-      from: "civic.buddy.gov.in",
+      from: "civic-buddy@gov.in",
       to: email,
       subject:
         emailType === "VERIFY" ? "Verify Your Email" : "Reset Your Password",
