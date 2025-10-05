@@ -4,12 +4,10 @@ import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { getDataFromToken } from "@/utils/getDataFromToken";
-// import User from "@/models/user.model";
 
 const LoginForm = () => {
   const router = useRouter();
-
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,33 +23,35 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      // Using FormData
+      setError("");
       const data = new FormData();
       data.append("email", formData.email);
       data.append("password", formData.password);
-
+      
       const response = await axios.post("/api/users/login", data);
-
-      if(!response.data.isVerified){
-        //TODO: if not verified setError
-        console.log("Please verify yourself first");
+      
+      if (!response.data.isVerified) {
+        setError("Please verify your email first");
+        toast.error("Please verify your email first");
+        return;
       }
-
-      if(response.data.role === "municipal_staff"){
+      
+      if (response.data.role === "municipal_staff") {
         router.push("/department");
-      }else{
+      } else {
         router.push("/user-profile");
       }
-
+      
       setFormData({
         email: "",
         password: "",
       });
     } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message || "Login failed. Please try again.";
+      setError(errorMessage);
       console.log(error);
-      toast.error("Login Failed!");
+      toast.error(errorMessage);
     }
   };
 
@@ -78,12 +78,11 @@ const LoginForm = () => {
               </svg>
             </div>
           </Link>
-
           <h1 className="text-gray-900 text-3xl mt-10 font-medium">Login</h1>
           <p className="text-gray-500 text-sm mt-2">
             Please sign in to continue
           </p>
-
+          
           {/* Email Input */}
           <div className="flex items-center w-full mt-10 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
             <svg
@@ -110,7 +109,7 @@ const LoginForm = () => {
               required
             />
           </div>
-
+          
           {/* Password Input */}
           <div className="flex items-center mt-4 w-full bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
             <svg
@@ -135,19 +134,24 @@ const LoginForm = () => {
               required
             />
           </div>
-
+          
           <div className="mt-5 text-left text-indigo-500">
             <a className="text-sm" href="#">
               Forgot password?
             </a>
           </div>
-
+          
+          {error && (
+            <p className="text-red-500 text-sm mt-3 text-left">{error}</p>
+          )}
+          
           <button
             type="submit"
             className="mt-2 w-full h-11 rounded-full text-white bg-indigo-500 hover:opacity-90 transition-opacity"
           >
             Login
           </button>
+          
           <p className="text-gray-500 text-sm mt-3 mb-11">
             Don't have an account?{" "}
             <Link className="text-indigo-500" href={`/signup`}>

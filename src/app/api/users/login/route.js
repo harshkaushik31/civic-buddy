@@ -19,7 +19,7 @@ export async function POST(request) {
 
     if (!user) {
       return NextResponse.json(
-        { message: "User does not exits" },
+        { message: "User does not exist" },
         { status: 400 }
       );
     }
@@ -30,13 +30,20 @@ export async function POST(request) {
 
     if (!isValidPassword) {
       return NextResponse.json(
-        { message: "Check your credientials" },
+        { message: "Invalid id or password" },
         { status: 400 }
       );
     }
 
     const role = user.role;
     const isVerified = user.isVerified;
+
+    if(!isVerified){
+      return NextResponse.json(
+        { message: "Please verify the email (Check Your email)" },
+        { status: 400 }
+      );
+    }
 
     const tokenData = {
       id: user._id,
