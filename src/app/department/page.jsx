@@ -16,8 +16,8 @@ export default  function page() {
     <div className="flex w-full flex-wrap justify-center items-center min-h-screen">
       {
         departments.map((dept, index)=>(
-          <Link href={`/department/${dept.value}`}>
-          <button key={index} className="border border-black bg-gray-100 p-12 m-8 rounded-2xl hover:cursor-pointer">
+          <Link href={`/department/${dept.value}`} key={index}>
+          <button  className="border border-black bg-gray-100 p-12 m-8 rounded-2xl hover:cursor-pointer">
             <strong>{dept.value}</strong>
             <br />
             <em>{dept.label}</em>
