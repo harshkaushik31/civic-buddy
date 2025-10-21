@@ -1,5 +1,7 @@
+// app/department/page.jsx
 import Link from "next/link";
 import { getAllDepartments } from "@/config/departments.config";
+import LogoutButton from "@/app/department/_components/LogoutButton";
 
 export const metadata = {
   title: "Select Department - Civic Buddy",
@@ -13,11 +15,14 @@ export default function DepartmentSelectionPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">Department Portal</h1>
-          <p className="mt-1 text-sm text-gray-600">
-            Select your department to access the complaint management dashboard
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Department Portal</h1>
+            <p className="mt-1 text-sm text-gray-600">
+              Select your department to access the complaint management dashboard
+            </p>
+          </div>
+          <LogoutButton />
         </div>
       </div>
 

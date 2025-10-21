@@ -36,7 +36,7 @@ export default async function DepartmentDashboard({ params }) {
 
   // TODO: Fetch actual data from your API
   const stats = {
-    total: 147,
+    total: 156,
     pending: 42,
     inProgress: 38,
     resolved: 76,
