@@ -29,25 +29,22 @@ export async function generateMetadata({ params }) {
   };
 }
 
-//TODO:
-async function getDepartmentStas(deptSlug){
-  try{
+async function getDepartmentStats(deptSlug) {
+  try {
     await connectDB();
 
-
     const stats = await complaintModel.aggregate([
-          { $match: { assignedDepartment: deptSlug } },
-          {
-            $group: {
-              _id: "$status",
-              count: { $sum: 1 },
-            },
-          },
-        ]);
+      { $match: { assignedDepartment: deptSlug } },
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
 
-        console.log(stats);
+    console.log("Stats:", stats);
 
-    // Format the stats
     const formattedStats = {
       total: 0,
       pending: 0,
@@ -65,17 +62,36 @@ async function getDepartmentStas(deptSlug){
     });
 
     return formattedStats;
-
-
-  }catch(error){
-    console.log('Error fetching department stats: ',error);
+  } catch (error) {
+    console.log('Error fetching department stats: ', error);
     return {
       total: 0,
       pending: 0,
       inProgress: 0,
       resolved: 0,
       rejected: 0
-    }
+    };
+  }
+}
+
+async function getRecentComplaints(deptSlug) {
+  try {
+    await connectDB();
+
+    // FIXED: Added await here
+    const recentComplaints = await complaintModel
+      .find({ assignedDepartment: deptSlug })
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .select('_id issueType status location createdAt description')
+      .lean();
+
+    console.log("Recent Complaints:", recentComplaints);
+
+    return recentComplaints;
+  } catch (error) {
+    console.log('Error fetching recent complaints: ', error);
+    return [];
   }
 }
 
@@ -87,9 +103,8 @@ export default async function DepartmentDashboard({ params }) {
     notFound();
   }
 
-
-  const stats = await getDepartmentStas(deptSlug);
-
+  const stats = await getDepartmentStats(deptSlug);
+  const recentComplaints = await getRecentComplaints(deptSlug);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -128,7 +143,6 @@ export default async function DepartmentDashboard({ params }) {
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -184,8 +198,8 @@ export default async function DepartmentDashboard({ params }) {
             title="Resolved"
             description="View Resolved Complaints"
             href={`/department/${deptSlug}/complaints/resolved`}
-            icon='✅'
-            color='#88e788'
+            icon="✅"
+            color="#88e788"
           />
         </div>
 
@@ -203,16 +217,72 @@ export default async function DepartmentDashboard({ params }) {
               View All →
             </Link>
           </div>
-          <div className="p-6">
-            <p className="text-gray-500 text-center py-8">
-              Recent complaints will appear here
-            </p>
+          <div className="divide-y">
+            {recentComplaints.length > 0 ? (
+              recentComplaints.map((complaint) => (
+                <Link
+                  key={complaint._id.toString()}
+                  href={`/department/${deptSlug}/complaints/${complaint._id}`}
+                  className="block p-6 hover:bg-gray-50 transition-colors"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">
+                        {complaint.issueType}
+                      </h3>
+                      {complaint.description && (
+                        <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                          {complaint.description}
+                        </p>
+                      )}
+                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                        <span>
+                          {new Date(complaint.createdAt).toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                        {complaint.location && (
+                          <>
+                            <span>•</span>
+                            <span className="flex items-center gap-1">
+                              📍 {complaint.location.address}
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <div className="ml-4">
+                      <span
+                        className={`px-3 py-1 text-xs font-medium rounded-full ${
+                          complaint.status === 'pending'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : complaint.status === 'in_progress'
+                            ? 'bg-blue-100 text-blue-800'
+                            : complaint.status === 'resolved'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-red-100 text-red-800'
+                        }`}
+                      >
+                        {complaint.status === 'in_progress' 
+                          ? 'In Progress' 
+                          : complaint.status.charAt(0).toUpperCase() + complaint.status.slice(1)}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="p-6">
+                <p className="text-gray-500 text-center py-8">
+                  No complaints found for this department
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-
-
