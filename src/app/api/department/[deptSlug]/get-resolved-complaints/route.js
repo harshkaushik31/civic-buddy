@@ -18,19 +18,19 @@ export async function GET(req, {params}){
 
         await connectDB();
 
-        const pendingComplaints = await complaintModel
+        const resolvedComplaints = await complaintModel
             .find({ assignedDepartment: deptSlug, status: 'resolved'})
             .sort({createdAt: -1})
             .select('_id issueType description location status')
             .lean();
 
-        console.log("The pending complaints are: ");
-        console.log(pendingComplaints);
+        console.log("The resolved complaints are: ");
+        console.log(resolvedComplaints);
 
         return NextResponse.json(
             {
             success: true, 
-            pendingComplaints: pendingComplaints
+            resolvedComplaints: resolvedComplaints
             },
             {status: 200}
         )
@@ -38,7 +38,7 @@ export async function GET(req, {params}){
     }catch(error){
         console.log('Could not get the Pending complaints',error);
         return NextResponse.json(
-            {success: false, pendingComplaints: {}},
+            {success: false, resolvedComplaints: {}},
             {status: 500}
         )
     }
