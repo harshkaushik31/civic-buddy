@@ -1,7 +1,10 @@
-// app/department/[deptSlug]/page.jsx
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDepartmentBySlug, getDepartmentSlugs } from "@/config/departments.config";
+import complaintModel from "@/models/complaint.model";
+import QuickActionCard from "../_components/QuickActionCard";
+import StatCard from "../_components/StatCard";
+import { connectDB } from "@/utils/connectDB";
 
 // For static generation
 export function generateStaticParams() {
@@ -26,6 +29,56 @@ export async function generateMetadata({ params }) {
   };
 }
 
+//TODO:
+async function getDepartmentStas(deptSlug){
+  try{
+    await connectDB();
+
+
+    const stats = await complaintModel.aggregate([
+          { $match: { assignedDepartment: deptSlug } },
+          {
+            $group: {
+              _id: "$status",
+              count: { $sum: 1 },
+            },
+          },
+        ]);
+
+        console.log(stats);
+
+    // Format the stats
+    const formattedStats = {
+      total: 0,
+      pending: 0,
+      inProgress: 0,
+      resolved: 0,
+      rejected: 0,
+    };
+
+    stats.forEach((stat) => {
+      formattedStats.total += stat.count;
+      if (stat._id === "pending") formattedStats.pending = stat.count;
+      if (stat._id === "in_progress") formattedStats.inProgress = stat.count;
+      if (stat._id === "resolved") formattedStats.resolved = stat.count;
+      if (stat._id === "rejected") formattedStats.rejected = stat.count;
+    });
+
+    return formattedStats;
+
+
+  }catch(error){
+    console.log('Error fetching department stats: ',error);
+    return {
+      total: 0,
+      pending: 0,
+      inProgress: 0,
+      resolved: 0,
+      rejected: 0
+    }
+  }
+}
+
 export default async function DepartmentDashboard({ params }) {
   const { deptSlug } = await params;
   const department = getDepartmentBySlug(deptSlug);
@@ -34,14 +87,9 @@ export default async function DepartmentDashboard({ params }) {
     notFound();
   }
 
-  // TODO: Fetch actual data from your API
-  const stats = {
-    total: 156,
-    pending: 42,
-    inProgress: 38,
-    resolved: 76,
-    avgResolutionTime: "3.5 days",
-  };
+
+  const stats = await getDepartmentStas(deptSlug);
+
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -88,7 +136,7 @@ export default async function DepartmentDashboard({ params }) {
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatCard
             title="Total Complaints"
             value={stats.total}
@@ -112,13 +160,6 @@ export default async function DepartmentDashboard({ params }) {
             value={stats.resolved}
             color="#10B981"
             icon="✅"
-          />
-          <StatCard
-            title="Avg Resolution"
-            value={stats.avgResolutionTime}
-            color="#8B5CF6"
-            icon="⏱️"
-            isTime
           />
         </div>
 
@@ -173,50 +214,5 @@ export default async function DepartmentDashboard({ params }) {
   );
 }
 
-// Stat Card Component
-function StatCard({ title, value, color, icon, isTime = false }) {
-  return (
-    <div className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-2xl">{icon}</span>
-        <div
-          className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-      </div>
-      <div className="text-3xl font-bold text-gray-900 mb-1">{value}</div>
-      <div className="text-sm text-gray-600">{title}</div>
-    </div>
-  );
-}
 
-// Quick Action Card Component
-function QuickActionCard({ title, description, href, icon, color, badge }) {
-  return (
-    <Link href={href} className="group">
-      <div className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-all hover:border-opacity-50"
-        style={{ borderColor: `${color}30` }}>
-        <div className="flex items-start justify-between mb-3">
-          <div
-            className="text-3xl p-2 rounded-lg"
-            style={{ backgroundColor: `${color}15` }}
-          >
-            {icon}
-          </div>
-          {badge && (
-            <span
-              className="px-2 py-1 text-xs font-semibold rounded-full text-white"
-              style={{ backgroundColor: color }}
-            >
-              {badge}
-            </span>
-          )}
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-1 group-hover:underline">
-          {title}
-        </h3>
-        <p className="text-sm text-gray-600">{description}</p>
-      </div>
-    </Link>
-  );
-}
+
