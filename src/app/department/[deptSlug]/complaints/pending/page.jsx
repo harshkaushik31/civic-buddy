@@ -1,10 +1,7 @@
 // app/department/[deptSlug]/complaints/pending/page.jsx
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  getDepartmentBySlug,
-  getDepartmentSlugs,
-} from "@/config/departments.config";
+import { getDepartmentBySlug, getDepartmentSlugs } from "@/config/departments.config";
 import { connectDB } from "@/utils/connectDB";
 import complaintModel from "@/models/complaint.model";
 import PendingComplaintCard from "@/app/department/_components/PendingComplaintCard";
@@ -19,7 +16,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { deptSlug } = await params;
   const department = getDepartmentBySlug(deptSlug);
-
+  
   if (!department) {
     return {
       title: "Department Not Found",
@@ -38,12 +35,20 @@ async function getPendingComplaints(deptSlug) {
     await connectDB();
 
     const pendingComplaints = await complaintModel
-      .find({ assignedDepartment: deptSlug, status: "pending" })
+      .find({ assignedDepartment: deptSlug, status: 'pending' })
       .sort({ createdAt: -1 })
-      .select("_id issueType description location status createdAt")
+      .select('_id issueType description location status createdAt')
       .lean();
 
-    return pendingComplaints;
+    // Serialize the data to plain objects
+    return pendingComplaints.map(complaint => ({
+      _id: complaint._id.toString(),
+      issueType: complaint.issueType,
+      description: complaint.description || null,
+      location: complaint.location || null,
+      status: complaint.status,
+      createdAt: complaint.createdAt.toISOString(),
+    }));
   } catch (error) {
     console.error("Error fetching pending complaints:", error);
     return [];
@@ -155,17 +160,11 @@ export default async function PendingComplaintsPage({ params }) {
           <div className="divide-y">
             {pendingComplaints.length > 0 ? (
               pendingComplaints.map((complaint) => (
-                <Link
-                  key={complaint._id.toString()}
-                  href={`/department/${deptSlug}/complaints/${complaint._id}`}
-                  className="block p-6 hover:bg-gray-50 transition-colors"
-                >
-                  <PendingComplaintCard
-                    key={complaint._id.toString()}
-                    complaint={complaint}
-                    deptSlug={deptSlug}
-                  />
-                </Link>
+                <PendingComplaintCard
+                  key={complaint._id}
+                  complaint={complaint}
+                  deptSlug={deptSlug}
+                />
               ))
             ) : (
               <div className="p-12 text-center">
