@@ -1,10 +1,10 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Image from "next/image";
 import { getDepartmentBySlug } from "@/config/departments.config";
 import toast from "react-hot-toast";
 
@@ -28,7 +28,6 @@ export default function ComplaintDetailPage() {
   const fetchComplaint = async () => {
     try {
       setLoading(true);
-      console.log(complaintId);
       const response = await axios.get(`/api/complaint/${complaintId}`);
       setComplaint(response.data.complaint);
     } catch (error) {
@@ -42,7 +41,7 @@ export default function ComplaintDetailPage() {
   const handleStatusUpdate = async (newStatus) => {
     try {
       setUpdating(true);
-      await axios.patch(`/api/complaints/${complaintId}/status`, {
+      const response = await axios.patch(`/api/complaint/${complaintId}/status`, {
         status: newStatus,
       });
       toast.success(`Complaint status updated to ${newStatus}`);
@@ -50,7 +49,11 @@ export default function ComplaintDetailPage() {
       fetchComplaint(); // Refresh data
     } catch (error) {
       console.error("Error updating status:", error);
-      toast.error("Failed to update status");
+      if (error.response?.status === 403) {
+        toast.error(error.response.data.message || "Cannot change status of a resolved complaint");
+      } else {
+        toast.error(error.response?.data?.error || "Failed to update status");
+      }
     } finally {
       setUpdating(false);
     }
@@ -137,16 +140,13 @@ export default function ComplaintDetailPage() {
             {/* Complaint Info Card */}
             <div className="bg-white rounded-lg shadow-sm border p-6">
               <div className="flex items-start justify-between mb-4">
-                
+
                 <div className="flex-1">
-                  
-                      <Image src={complaint.imageUrl} 
+                  <Image src={complaint.imageUrl} 
                       className="rounded-lg mb-4"
                       alt="Complaint image" height={300} width={750}/>
-                
-                  
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    {complaint.issueType} 
+                    {complaint.issueType}
                   </h2>
                   <span className={`inline-block px-3 py-1 text-sm font-medium rounded-full border ${getStatusColor(complaint.status)}`}>
                     {getStatusLabel(complaint.status)}
