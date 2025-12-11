@@ -118,7 +118,7 @@ const Hero = () => {
         
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold max-w-4xl text-white">
-          Have a complaint againt the Government?
+          Have a complaint against the Government?
         </h1>
         <p className="max-w-xl text-center mt-6 px-4">
           Unlock potential with tailored strategies designed for success.

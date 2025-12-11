@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { TestimonialCard } from "./TestimonialCard";
 const testimonials = [
   {
-    name: "Aditya Tripthi",
+    name: "Aditya Tripathi",
     title: "Resident, New Delhi",
 	mainTitle: "Easy to Use",
     message:

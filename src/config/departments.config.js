@@ -66,19 +66,19 @@ export const DEPARTMENTS = {
     email: 'water@nayaraipur.gov.in',
     phone: '+91-771-XXXXXXX'
   },
-  Traffic: {
-    slug: 'Traffic',
-    name: 'Traffic Police',
-    shortName: 'Traffic',
-    fullName: 'Traffic Police',
-    color: '#DC2626', // red-600
-    bgColor: '#FEE2E2', // red-100
-    icon: '🚦',
-    description: 'Traffic Management & Safety',
-    categories: ['Signal Issues', 'Traffic Congestion', 'Parking', 'Road Safety'],
-    email: 'traffic@nayaraipur.gov.in',
-    phone: '+91-771-XXXXXXX'
-  },
+  // Traffic: {
+  //   slug: 'Traffic',
+  //   name: 'Traffic Police',
+  //   shortName: 'Traffic',
+  //   fullName: 'Traffic Police',
+  //   color: '#DC2626', // red-600
+  //   bgColor: '#FEE2E2', // red-100
+  //   icon: '🚦',
+  //   description: 'Traffic Management & Safety',
+  //   categories: ['Signal Issues', 'Traffic Congestion', 'Parking', 'Road Safety'],
+  //   email: 'traffic@nayaraipur.gov.in',
+  //   phone: '+91-771-XXXXXXX'
+  // },
   Environment: {
     slug: 'Environment',
     name: 'Environment Department',
