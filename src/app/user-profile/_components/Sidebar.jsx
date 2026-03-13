@@ -49,6 +49,12 @@ function Sidebar({ response }) {
       href: "/delete-complaint",
       icon: Minus,
       description: "Delte a complaint"
+    },
+    {
+      name: "Automatic Pothole",
+      href: "/automatic-pothole",
+      icon: Plus,
+      description: "Automatic Pothole"
     }
   ];
 

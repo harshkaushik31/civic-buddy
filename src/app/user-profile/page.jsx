@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 export default function ProfilePage() {
   const router = useRouter();
   const [data, setData] = useState({});
+  const [numberOfComplaints, setNumberOfComplaints] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,6 +16,8 @@ export default function ProfilePage() {
       setError(null);
       
       const response = await axios.post("/api/users/profile");
+      const totalComplaints = await axios.get("api/users/your-complaint-count");
+      setNumberOfComplaints(totalComplaints.data.complaintsCount);
       setData(response.data.data);
       
     } catch (error) {
@@ -82,7 +85,7 @@ export default function ProfilePage() {
             <p><strong>Name:</strong> {data.name || 'N/A'}</p>
             <p><strong>Email:</strong> {data.email || 'N/A'}</p>
             <p><strong>Role:</strong> {data.role || 'N/A'}</p>
-            <p><strong>Complaints:</strong> {data.complaints ? data.complaints.length : 0}</p>
+            <p><strong>Complaints:</strong> {numberOfComplaints} </p>
           </div>
           
           {/* Debug section - TODO: remove in production */}
