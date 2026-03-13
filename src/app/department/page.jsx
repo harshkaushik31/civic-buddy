@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { getAllDepartments } from "@/config/departments.config";
 import LogoutButton from "@/app/department/_components/LogoutButton";
+import MapSection from "./MapSection/page";
 
 export const metadata = {
   title: "Select Department - Civic Buddy",
@@ -153,6 +154,8 @@ export default function DepartmentSelectionPage() {
           </div>
         </div>
       </div>
+
+      <MapSection/>
     </div>
   );
 }
